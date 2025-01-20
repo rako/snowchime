@@ -1,39 +1,10 @@
 ### チャンネルを管理する
 
+from search   import search
+from util import validate_input, check_channel_id
+
 # チャンネルリスト
 channel_list = []
-
-# 入力チェック
-
-def validate_input(input_data):
-    input_data = input_data.strip()
-    stripped_data = ""
-
-    if 'https://www.youtube.com/channel/' in input_data:
-        stripped_data = input_data.replace('https://www.youtube.com/channel/', '')
-    if 'https://www.youtube.com/@' in input_data:
-        stripped_data = input_data.replace('https://www.youtube.com/@', '')
-    if 'https://www.youtube.com/c/' in input_data:
-        stripped_data = input_data.replace('https://www.youtube.com/c/', '')
-    
-    return stripped_data
-
-
-# チャンネルIDが存在しているかチェック
-
-def check_channel_id(data):
-    # urlであった場合、チャンネルIDを取得する
-    sanitized_data = validate_input(data)
-    if len(sanitized_data) >= 1:
-        search(data)
-        return True
-    else:
-        return False
-
-
-# APIに検索をかける
-def search(data):
-    pass
 
 
 # チャンネルを追加する
@@ -44,10 +15,14 @@ def add():
         data = input()
         # ここに"loading..."みたいなの入れてみる？
         if check_channel_id(data):
-            channel_list.append(data)
-            print("チャンネルが通知リストに追加されました")
-            break
-        print("そのようなチャンネルIDは存在しません")
+            if search(data) == True:
+                channel_list.append(data)
+                print("チャンネルが通知リストに追加されました")
+                break
+            else:
+                print("そのようなチャンネルIDは存在しません")
+        else:
+            print("チャンネルIDもしくはチャンネルのURLを正しく入力してください")
 
 
 # チャンネルを削除する
