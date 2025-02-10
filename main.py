@@ -1,6 +1,16 @@
 # import manage_list, search, util
 import functions_framework
 from flask import make_response
+import os
+import discord
+import requests, json
+
+discord_token = os.environ.get("DISCORD_TOKEN")
+discord_channel = os.environ.get("DISCORD_CHANNEL_ID")
+client_id = os.environ.get("DISCORD_CLIENT_ID")
+client_secret = os.environ.get("DISCORD_CLIENT_SECRET")
+
+webhook_url = os.environ.get("DISCORD_WEBHOOK_URL")
 
 @functions_framework.http
 def main(request):
@@ -17,4 +27,14 @@ def main(request):
             return response
     
     # 実際のリクエスト処理
-    return "Hello Request"
+    send_message()
+    return "OK"
+
+
+def send_message():
+    main_content = {
+        'content': 'test text'
+    }
+    headers = {"Content-Type": "application/json"}
+
+    response = requests.post(webhook_url, data=json.dumps(main_content), headers=headers)
