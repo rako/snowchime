@@ -3,6 +3,7 @@
 import functions_framework
 import os
 import requests
+from flask import Response
 import xml.etree.ElementTree as ET
 
 discord_token = str(os.environ.get("DISCORD_TOKEN"))
@@ -17,15 +18,15 @@ def main(request):
     # 購読確認リクエスト処理
     if "hub.mode" in request.args and request.args["hub.mode"] == "subscribe":
         challenge = request.args.get("hub.challenge")
-        response = requests.get(request.url)
+        response = Response()
         if challenge:
-            response.headers["Content-Type"] = "text/plain"
-            response.status_code = 200
-            response.content = challenge
+            response.set_data(challenge)
+            response.mimetype = "text/plain"
+            response.status = 200
             return response
         else:
-            response.status_code = 400
-            response.content = "Invalid request"
+            response.set_data("Invalid request")
+            response.status = 400
             return response
     
     # 実際のリクエスト処理
