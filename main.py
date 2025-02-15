@@ -43,22 +43,25 @@ def send_message(request):
         "Content-Type": "application/json"
     }
 
-    xmltree = ET.parse(request.get_data())
+    import io
+    xmltree = ET.parse(io.BytesIO(request.get_data()))
     root = xmltree.getroot()
-    entry = root["entry"]
 
     # フィードの要素の時だけにする
-    if root.tag != "feed":
+    if root.tag != "{http://www.w3.org/2005/Atom}feed":
         return
 
-    published_date = entry.findtext("published")
-    updated_date = entry.findtext("updated")
-    video_title = entry.findtext("title")
-    video_url = entry.findtext("link/@href")
+    NAMESPACE = {'atom': 'http://www.w3.org/2005/Atom', 'yt': 'http://www.youtube.com/xml/schemas/2015'}
+    entry = root.find("atom:entry", NAMESPACE)
+
+    published_date = entry.findtext("atom:published", namespaces=NAMESPACE)
+    updated_date = entry.findtext("atom:updated", namespaces=NAMESPACE)
+    video_title = entry.findtext("atom:title", namespaces=NAMESPACE)
+    video_url = entry.find("atom:link", NAMESPACE).attrib['href']
     
     # 動画アップロードしたときだけにする
-    #if published_date != updated_date:
-        #return
+    if published_date != updated_date:
+        return
     
     main_content = {
         "mention_everyone": True,
