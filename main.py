@@ -76,15 +76,8 @@ def send_message(request):
             return
         
         main_content = {
-            "mention_everyone": True,
-            "content": "新しい動画です！",
+            "content": f"@everyone 新着動画だよ！\n{video_url}",
             "channel_id": discord_channel,
-            "embeds": [
-                {
-                    "title": video_title,
-                    "url": video_url,
-                }
-            ],
         }
 
         # レスポンス送信後のステータスコード確認
@@ -92,6 +85,7 @@ def send_message(request):
         print(f"Discord API レスポンス: {response.status_code} {response.text[:100]}")
         
         return "Success"
+
     except Exception as e:
         print(f"エラーが発生しました: {str(e)}")
         return f"Error: {str(e)}"
