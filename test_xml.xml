@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns:yt="http://www.youtube.com/xml/schemas/2015" xmlns="http://www.w3.org/2005/Atom">
+  <link rel="hub" href="https://pubsubhubbub.appspot.com"/>
+  <link rel="self" href="https://www.youtube.com/xml/feeds/videos.xml?channel_id=UC-kl8i6lq_ObZAn4kTL2WHA"/>
+  <title>YouTube video feed</title>
+  <updated>2025-03-02T13:00:00Z</updated>
+  <entry>
+    <id>yt:video:dQw4w9WgXcQ</id>
+    <yt:videoId>dQw4w9WgXcQ</yt:videoId>
+    <yt:channelId>UC-kl8i6lq_ObZAn4kTL2WHA</yt:channelId>
+    <title>テスト動画通知</title>
+    <link rel="alternate" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"/>
+    <author>
+      <name>テストチャンネル</name>
+      <uri>https://www.youtube.com/channel/UC-kl8i6lq_ObZAn4kTL2WHA</uri>
+    </author>
+    <published>2025-03-02T13:00:00Z</published>
+    <updated>2025-03-02T13:00:00Z</updated>
+  </entry>
+</feed>
