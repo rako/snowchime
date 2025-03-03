@@ -76,7 +76,7 @@ def send_message(request):
             return
         
         main_content = {
-            "content": f"@everyone 新着動画だよ！\n{video_url}",
+            "content": f"@everyone 新着動画だよ！\n[{video_title}]({video_url})",
             "channel_id": discord_channel,
         }
 
