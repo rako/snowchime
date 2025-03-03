@@ -71,10 +71,6 @@ def send_message(request):
             
         video_url = link_element.attrib['href']
         
-        # 動画アップロードしたときだけにする
-        if published_date != updated_date:
-            return
-        
         main_content = {
             "content": f"@everyone 新着動画だよ！\n[{video_title}]({video_url})",
             "channel_id": discord_channel,
