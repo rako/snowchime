@@ -44,8 +44,13 @@ def send_message(request):
             "Content-Type": "application/json"
         }
 
+        # XMLデータをログに出力
+        data = request.get_data()
+        print("===== 受信したXMLデータ =====")
+        print(data.decode('utf-8', errors='replace'))
+        
         import io
-        xmltree = ET.parse(io.BytesIO(request.get_data()))
+        xmltree = ET.parse(io.BytesIO(data))
         root = xmltree.getroot()
 
         # フィードの要素の時だけにする
