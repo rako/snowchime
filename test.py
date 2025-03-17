@@ -7,7 +7,7 @@ with open("test_xml.xml", "r", encoding="utf-8") as file:
 
 def test():
     headers = {
-        "Content-Type": "application/xml"
+        "Content-Type": "application/atom+xml"
     }
     response = requests.post(url, headers=headers, data=xml_content)
     

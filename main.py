@@ -15,6 +15,10 @@ discord_api_url = f"https://discord.com/api/v10/channels/{discord_channel}/messa
 
 @functions_framework.http
 def main(request):
+    # すべてのリクエストをログに記録
+    print(f"新しいリクエスト: {request.method} - {request.path}")
+    print(f"ヘッダー: {dict(request.headers)}")
+    
     # 購読確認リクエスト処理
     if "hub.mode" in request.args and request.args["hub.mode"] == "subscribe":
         challenge = request.args.get("hub.challenge")
